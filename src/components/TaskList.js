@@ -2,27 +2,39 @@ import React from "react";
 import { Task } from "./Task";
 
 export const TaskList = () => {
-  const tasks = ["desayunar", "deportes", "estudiar", "almorzar", "cenar"];
+  const tasks = [
+    {
+      id: 1,
+      name: "desayunar",
+      status: false,
+    },
+    {
+      id: 2,
+      name: "deportes",
+      status: true,
+    },
+    {
+      id: 3,
+      name: "estudiar",
+      status: false,
+    },
+    {
+      id: 4,
+      name: "almorzar",
+      status: false,
+    },
+    {
+      id: 5,
+      name: "cenar",
+      status: false,
+    },
+  ];
 
   return (
-    <ul className="flex justify-around  border-8 border-indigo-600">
-      <div className="w-96">
-        <h1 className="text-4xl">Lista de tareas</h1>
-        {tasks.map((e) => {
-          return <Task key={e} nameTask={e} />;
-        })}
-      </div>
+    <ul className="flex justify-center ">
       <div className="">
-        <h1 className="flex text-4xl justify-center">
-          Lista de tareas para compretar
-        </h1>
         {tasks.map((e) => {
-          return (
-            <div className="flex flex-row items-center ">
-              <Task key={e} nameTask={e}></Task>
-              <input type="checkbox" />
-            </div>
-          );
+          return <Task key={e.id} nameTask={e.name} status={e.status} />;
         })}
       </div>
     </ul>

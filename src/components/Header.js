@@ -1,9 +1,13 @@
 import React from "react";
+import img from "../img/bg-desktop-light.jpg";
 
 const Header = () => {
   return (
-    <div className="flex justify-center mt-10 mb-10 ">
-      <h1 className="text-6xl ">Task List</h1>
+    <div>
+      <div className="flex justify-center">
+        <img className="w-full" src={img} alt="fondo" />
+      </div>
+      <h1 className="relative -top-64 -right-1/3 text-6xl text-white">TODO</h1>
     </div>
   );
 };

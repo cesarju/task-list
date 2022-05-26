@@ -1,8 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
+
+import { GrFormClose } from "react-icons/gr";
+
 export const Task = ({ nameTask, status }) => {
   const [statusTask, setStatusTask] = useState(status);
   const [text, setText] = useState("");
+  const [styleTask, setStyleTask] = useState(
+    "text-2xl font-medium text-gray-900 truncate dark:text-white"
+  );
   const [style, setStyle] = useState(
     "bg-green-100 text-green-800 text-xs font-semibold mr-10 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900"
   );
@@ -12,13 +18,19 @@ export const Task = ({ nameTask, status }) => {
       setStatusTask(false);
       setText("Completado");
       setStyle(
-        "bg-green-100 text-green-800 text-xs font-semibold mr-10 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900"
+        "w-24 bg-green-100 text-green-800 text-xs font-semibold mr-10 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900"
+      );
+      setStyleTask(
+        "text-2xl font-medium text-gray-900 truncate dark:text-white line-through"
       );
     } else {
       setStatusTask(true);
       setText("Pendite");
       setStyle(
-        "bg-red-100 text-red-800 text-xs font-semibold mr-10 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900"
+        "w-20 bg-red-100 text-red-800 text-xs font-semibold mr-10 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900"
+      );
+      setStyleTask(
+        "text-2xl font-medium text-gray-900 truncate dark:text-white "
       );
     }
   };
@@ -27,31 +39,29 @@ export const Task = ({ nameTask, status }) => {
   }, []);
 
   return (
-    <div className="flex flex-row">
-      <div className="flex flex-row items-center w-96 gap-8 pl-10 justify-start m-1 text-white bg-gradient-to-r from-cyan-500 to-blue-500 :bg-gradient-to-bl    rounded-lg text-2xl">
-        <p>📚</p>
-        <div className="flex flex-col">
-          <li>{nameTask}</li>
-          <button onClick={() => handleStatus(statusTask)} class={style}>
-            {text}
-          </button>
-        </div>
-      </div>
-      <div className="flex flex-col items-center justify-between m-2 gap-2  ">
-        <p className="w-28">{status}</p>
-        <button
-          type="button"
-          class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Edit
-        </button>
+    <div className="flex flex-row justify-between">
+      <div class="p-10 w-1/3 bg-white rounded-lg border shadow-md sm:p-4 dark:bg-gray-800 dark:border-gray-700">
+        <div class="flow-root">
+          <ul class="divide-y divide-gray-200 dark:divide-gray-700">
+            <li class="sm:pt-1">
+              <div class="flex justify-center items-center space-x-6">
+                <input
+                  type={"checkbox"}
+                  className="w-6 h-6"
+                  onClick={() => handleStatus(statusTask)}
+                />
 
-        <button
-          type="button"
-          class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-        >
-          Delete
-        </button>
+                <div class="flex-1 min-w-0">
+                  <p class={styleTask}>{nameTask}</p>
+                  <p class="">{status}</p>
+                  <p class={style}>{text}</p>
+                </div>
+
+                <GrFormClose className="w-9 h-9" />
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );

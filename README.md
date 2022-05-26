@@ -1,4 +1,4 @@
-![Image](./src/img/preview.png)
+![Image](./src/img/review-1-hooks.png)
 
 # Getting Started with Create React App
 

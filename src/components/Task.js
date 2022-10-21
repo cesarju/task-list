@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-export const Task = ({ item, onDelete }) => {
+export const Task = ({ item, onDelete, onEdit }) => {
   const [statusTask, setStatusTask] = useState(item.status);
   const [text, setText] = useState("Pendiente");
   const [styleTask, setStyleTask] = useState(
@@ -33,22 +33,36 @@ export const Task = ({ item, onDelete }) => {
     }
   };
 
+  function handleDeleteTask(event) {
+    return onDelete(item.id);
+  }
+  function handleEditTask(event) {
+    return onEdit(item.status);
+  }
+
+  //mandar toda la logica de editar al componente Task
+
   return (
     <li className="w-full">
       <div className="flex justify-between bg-white border-2 rounded-lg px-4 py-2 gap-3 mt-2 w-100%">
         <div className="grid">
-          <p className={styleTask}>{item.name}</p>
+          <p className={styleTask}>
+            {item.name} {item.id}
+          </p>
         </div>
         <div>
           <button className={style} onClick={handleStatus}>
             {text}
           </button>
-          <button className="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-xl mr-1 ">
+          <button
+            className="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-xl mr-1 "
+            onClick={handleEditTask}
+          >
             Edit
           </button>
           <button
             className="bg-red-800 text-white text-sm leading-6 font-medium py-2 px-3 rounded-xl"
-            onClick={(event) => onDelete(item.id)}
+            onClick={handleDeleteTask}
           >
             Delete
           </button>

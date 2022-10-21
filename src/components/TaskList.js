@@ -31,6 +31,7 @@ export const TaskList = () => {
   ]; */
   const [todoTask, setTodoTask] = useState([]);
   const [valueInput, setValueInput] = useState("");
+  const [isEdit, setIsEdit] = useState(false);
 
   const handleOnchange = (event) => {
     const eventOnChange = event.target.value;
@@ -51,6 +52,27 @@ export const TaskList = () => {
   const handleDelete = (id) => {
     const temporal = todoTask.filter((item) => item.id !== id);
     setTodoTask(temporal);
+  };
+
+  const handleEditTask = (id) => {
+    setIsEdit(!isEdit);
+  };
+
+  function handleClickEdit(event) {
+    event.preventDefault();
+  }
+
+  const InpuEdit = () => {
+    const [editText, setEditText] = useState();
+    return (
+      <form>
+        <input
+          className="outline-none block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Edit"
+        />
+        <button onClick={handleClickEdit}>Actualizar</button>
+      </form>
+    );
   };
 
   return (
@@ -78,8 +100,16 @@ export const TaskList = () => {
       <div className="">
         <ul className="">
           {todoTask.map((e) => {
-            return <Task key={e.id} item={e} onDelete={handleDelete} />;
+            return (
+              <Task
+                key={e.id}
+                item={e}
+                onDelete={handleDelete}
+                onEdit={handleEditTask}
+              />
+            );
           })}
+          {isEdit ? <InpuEdit /> : "mostrar tareas"}
         </ul>
       </div>
     </div>
